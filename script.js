@@ -4,14 +4,119 @@
 const testDiv = document.createElement('div');
 document.body.appendChild(testDiv);
 
-function updateDiv(json) {
-  testDiv.innerHTML = json[0].country;
+// DOM Variables
+// Current
+const currentCity = document.querySelector('#currentCity');
+const currentTemp = document.querySelector('#currentTemp');
+const currentDesc = document.querySelector('#currentDesc');
+const currentHigh = document.querySelector('#currentHigh');
+const currentLow = document.querySelector('#currentLow');
+
+// Forecast Day
+const day1Day = document.querySelector('#dayOne>.day');
+const day1Icon = document.querySelector('#dayOne>.icon');
+const day1HighC = document.querySelector('#dayOne>.highC');
+const day1LowC = document.querySelector('#dayOne>.lowC');
+
+const day2Day = document.querySelector('#dayTwo>.day');
+const day2Icon = document.querySelector('#dayTwo>.icon');
+const day2HighC = document.querySelector('#dayTwo>.highC');
+const day2LowC = document.querySelector('#dayTwo>.lowC');
+
+const day3Day = document.querySelector('#dayThree>.day');
+const day3Icon = document.querySelector('#dayThree>.icon');
+const day3HighC = document.querySelector('#dayThree>.highC');
+const day3LowC = document.querySelector('#dayThree>.lowC');
+
+// Wind
+const windSpeed = document.querySelector('#windSpeed');
+const windDir = document.querySelector('#windDir');
+const windDeg = document.querySelector('#windDeg');
+
+// Feels Like
+const feelsLike = document.querySelector('#feelsLikeC');
+
+// Sun
+const sunrise = document.querySelector('#sunrise');
+const sunset = document.querySelector('#sunset');
+
+// Moon
+const illumination = document.querySelector('#illumination');
+const moonrise = document.querySelector('#moonrise');
+const moonPhase = document.querySelector('#moonPhase');
+
+// Visibility
+const visibility = document.querySelector('#visKm');
+
+// Precipitation
+const precipitation = document.querySelector('#precipMm');
+
+// Humidity
+const humidity = document.querySelector('#humidPercent');
+
+// Pressure
+const pressure = document.querySelector('#pressHpa');
+
+function updateDiv(jsonWeather) {
+  console.log(jsonWeather);
+
+  // Current
+  currentCity.innerText = jsonWeather.location.name;
+  currentTemp.innerText = `${jsonWeather.current.temp_c}\u00B0C`;
+  currentDesc.innerText = jsonWeather.current.condition.text;
+  currentHigh.innerText = `${jsonWeather.forecast.forecastday[0].day.maxtemp_c}\u00B0C`;
+  currentLow.innerText = `${jsonWeather.forecast.forecastday[0].day.mintemp_c}\u00B0C`;
+
+  // Forecast Day
+  day1Day.innerHTML = jsonWeather.forecast.forecastday[0].date;
+  day1Icon.innerHTML = 'Icon';
+  day1HighC.innerHTML = `${jsonWeather.forecast.forecastday[0].day.maxtemp_c}\u00B0C`;
+  day1LowC.innerHTML = `${jsonWeather.forecast.forecastday[0].day.mintemp_c}\u00B0C`;
+
+  day2Day.innerHTML = jsonWeather.forecast.forecastday[1].date;
+  day2Icon.innerHTML = 'Icon';
+  day2HighC.innerHTML = `${jsonWeather.forecast.forecastday[1].day.maxtemp_c}\u00B0C`;
+  day2LowC.innerHTML = `${jsonWeather.forecast.forecastday[1].day.mintemp_c}\u00B0C`;
+
+  day3Day.innerHTML = jsonWeather.forecast.forecastday[2].date;
+  day3Icon.innerHTML = 'Icon';
+  day3HighC.innerHTML = `${jsonWeather.forecast.forecastday[2].day.maxtemp_c}\u00B0C`;
+  day3LowC.innerHTML = `${jsonWeather.forecast.forecastday[2].day.mintemp_c}\u00B0C`;
+
+  // Wind
+  windSpeed.innerHTML = `${jsonWeather.current.wind_kph}kph`;
+  windDir.innerHTML = jsonWeather.current.wind_dir;
+  windDeg.innerHTML = `${jsonWeather.current.wind_degree}\u00B0C`;
+
+  // Feels Like
+  feelsLike.innerHTML = `${jsonWeather.current.feelslike_c}\u00B0C`;
+
+  // Sun
+  sunrise.innerHTML = jsonWeather.forecast.forecastday[0].astro.sunrise;
+  sunset.innerHTML = jsonWeather.forecast.forecastday[0].astro.sunset;
+
+  // Moon
+  illumination.innerHTML = jsonWeather.forecast.forecastday[0].astro.moon_illumination;
+  moonrise.innerHTML = jsonWeather.forecast.forecastday[0].astro.moonrise;
+  moonPhase.innerHTML = jsonWeather.forecast.forecastday[0].astro.moon_phase;
+
+  // Visibility
+  visibility.innerHTML = `${jsonWeather.current.vis_km}km`;
+
+  // Precipitation
+  precipitation.innerHTML = `${jsonWeather.current.precip_mm}mm`;
+
+  // Humidity
+  humidity.innerHTML = `${jsonWeather.current.humidity}%`;
+
+  // Pressure
+  pressure.innerHTML = `${jsonWeather.current.pressure_mb}hPa`;
 }
 
 async function getWeather() {
   try {
     const data = await fetch(
-      'http://api.weatherapi.com/v1/search.json?key=9e75879a84fd47acb31141945230407&q=london',
+      'http://api.weatherapi.com/v1/forecast.json?key=9e75879a84fd47acb31141945230407&q=London&days=5&aqi=yes&alerts=no',
       {
         method: 'GET',
         mode: 'cors',
