@@ -1,16 +1,22 @@
 // Basic fetch functionality
 // Change variable names (json, testDiv)
 // Change fetch type
-const testDiv = document.createElement('div');
-document.body.appendChild(testDiv);
+// const testDiv = document.createElement('div');
+// document.body.appendChild(testDiv);
 
 // DOM Variables
+// Autocomplete
+const locations = [];
+
 // Current
 const currentCity = document.querySelector('#currentCity');
 const currentTemp = document.querySelector('#currentTemp');
 const currentDesc = document.querySelector('#currentDesc');
 const currentHigh = document.querySelector('#currentHigh');
 const currentLow = document.querySelector('#currentLow');
+
+// Forecast Hour
+const forecastHour = document.querySelector('#forecastHour');
 
 // Forecast Day
 const day1Day = document.querySelector('#dayOne>.day');
@@ -57,6 +63,51 @@ const humidity = document.querySelector('#humidPercent');
 // Pressure
 const pressure = document.querySelector('#pressHpa');
 
+// Functions
+// Reset forecastHour div
+function clearHour() {
+  while (forecastHour.firstChild) {
+    forecastHour.removeChild(forecastHour.firstChild);
+  }
+}
+
+// Populate forecastHour div
+function updateHour(jsonWeather) {
+  // Reset main forecastHour div
+  clearHour();
+
+  // Get current hour
+  const dateNow = new Date();
+  const hourNow = dateNow.getHours();
+
+  for (let i = hourNow; i < 24; i++) {
+    // Create Elements
+    const hourDiv = document.createElement('div');
+    const hourTime = document.createElement('h2');
+    const hourIcon = document.createElement('div');
+    const hourTemp = document.createElement('h2');
+
+    hourDiv.classList.add('hour', 'flex', 'flex-row', 'gap-3', 'overflow-auto');
+    hourTime.classList.add('hourTime');
+    hourIcon.classList.add('hourIcon');
+    hourTemp.classList.add('hourTemp');
+
+    // Fetched data
+    hourTime.innerText = jsonWeather.forecast.forecastday[0].hour[i].time;
+    hourIcon.innerText = 'Icon';
+    hourTemp.innerText = jsonWeather.forecast.forecastday[0].hour[i].temp_c;
+
+    // Append fetched data to single div
+    hourDiv.appendChild(hourTime);
+    hourDiv.appendChild(hourIcon);
+    hourDiv.appendChild(hourTemp);
+
+    // Append to main forecastHour div
+    forecastHour.appendChild(hourDiv);
+  }
+}
+
+// Populate HTML with weather data
 function updateDiv(jsonWeather) {
   console.log(jsonWeather);
 
@@ -67,56 +118,69 @@ function updateDiv(jsonWeather) {
   currentHigh.innerText = `${jsonWeather.forecast.forecastday[0].day.maxtemp_c}\u00B0C`;
   currentLow.innerText = `${jsonWeather.forecast.forecastday[0].day.mintemp_c}\u00B0C`;
 
+  // // Forcast Hour
+  // updateHour();
+
   // Forecast Day
-  day1Day.innerHTML = jsonWeather.forecast.forecastday[0].date;
-  day1Icon.innerHTML = 'Icon';
-  day1HighC.innerHTML = `${jsonWeather.forecast.forecastday[0].day.maxtemp_c}\u00B0C`;
-  day1LowC.innerHTML = `${jsonWeather.forecast.forecastday[0].day.mintemp_c}\u00B0C`;
+  day1Day.innerText = jsonWeather.forecast.forecastday[0].date;
+  day1Icon.innerText = 'Icon';
+  day1HighC.innerText = `${jsonWeather.forecast.forecastday[0].day.maxtemp_c}\u00B0C`;
+  day1LowC.innerText = `${jsonWeather.forecast.forecastday[0].day.mintemp_c}\u00B0C`;
 
-  day2Day.innerHTML = jsonWeather.forecast.forecastday[1].date;
-  day2Icon.innerHTML = 'Icon';
-  day2HighC.innerHTML = `${jsonWeather.forecast.forecastday[1].day.maxtemp_c}\u00B0C`;
-  day2LowC.innerHTML = `${jsonWeather.forecast.forecastday[1].day.mintemp_c}\u00B0C`;
+  day2Day.innerText = jsonWeather.forecast.forecastday[1].date;
+  day2Icon.innerText = 'Icon';
+  day2HighC.innerText = `${jsonWeather.forecast.forecastday[1].day.maxtemp_c}\u00B0C`;
+  day2LowC.innerText = `${jsonWeather.forecast.forecastday[1].day.mintemp_c}\u00B0C`;
 
-  day3Day.innerHTML = jsonWeather.forecast.forecastday[2].date;
-  day3Icon.innerHTML = 'Icon';
-  day3HighC.innerHTML = `${jsonWeather.forecast.forecastday[2].day.maxtemp_c}\u00B0C`;
-  day3LowC.innerHTML = `${jsonWeather.forecast.forecastday[2].day.mintemp_c}\u00B0C`;
+  day3Day.innerText = jsonWeather.forecast.forecastday[2].date;
+  day3Icon.innerText = 'Icon';
+  day3HighC.innerText = `${jsonWeather.forecast.forecastday[2].day.maxtemp_c}\u00B0C`;
+  day3LowC.innerText = `${jsonWeather.forecast.forecastday[2].day.mintemp_c}\u00B0C`;
 
   // Wind
-  windSpeed.innerHTML = `${jsonWeather.current.wind_kph}kph`;
-  windDir.innerHTML = jsonWeather.current.wind_dir;
-  windDeg.innerHTML = `${jsonWeather.current.wind_degree}\u00B0C`;
+  windSpeed.innerText = `${jsonWeather.current.wind_kph}kph`;
+  windDir.innerText = jsonWeather.current.wind_dir;
+  windDeg.innerText = `${jsonWeather.current.wind_degree}\u00B0C`;
 
   // Feels Like
-  feelsLike.innerHTML = `${jsonWeather.current.feelslike_c}\u00B0C`;
+  feelsLike.innerText = `${jsonWeather.current.feelslike_c}\u00B0C`;
 
   // Sun
-  sunrise.innerHTML = jsonWeather.forecast.forecastday[0].astro.sunrise;
-  sunset.innerHTML = jsonWeather.forecast.forecastday[0].astro.sunset;
+  sunrise.innerText = jsonWeather.forecast.forecastday[0].astro.sunrise;
+  sunset.innerText = jsonWeather.forecast.forecastday[0].astro.sunset;
 
   // Moon
-  illumination.innerHTML = jsonWeather.forecast.forecastday[0].astro.moon_illumination;
-  moonrise.innerHTML = jsonWeather.forecast.forecastday[0].astro.moonrise;
-  moonPhase.innerHTML = jsonWeather.forecast.forecastday[0].astro.moon_phase;
+  illumination.innerText = jsonWeather.forecast.forecastday[0].astro.moon_illumination;
+  moonrise.innerText = jsonWeather.forecast.forecastday[0].astro.moonrise;
+  moonPhase.innerText = jsonWeather.forecast.forecastday[0].astro.moon_phase;
 
   // Visibility
-  visibility.innerHTML = `${jsonWeather.current.vis_km}km`;
+  visibility.innerText = `${jsonWeather.current.vis_km}km`;
 
   // Precipitation
-  precipitation.innerHTML = `${jsonWeather.current.precip_mm}mm`;
+  precipitation.innerText = `${jsonWeather.current.precip_mm}mm`;
 
   // Humidity
-  humidity.innerHTML = `${jsonWeather.current.humidity}%`;
+  humidity.innerText = `${jsonWeather.current.humidity}%`;
 
   // Pressure
-  pressure.innerHTML = `${jsonWeather.current.pressure_mb}hPa`;
+  pressure.innerText = `${jsonWeather.current.pressure_mb}hPa`;
 }
 
-async function getWeather() {
+// Update city list
+function updateCity(jsonCity) {
+  // Final 2 ('null' & 'based') was not included
+  for (let i = 0; i < jsonCity.data.length - 2; i++) {
+    locations.push(jsonCity.data[i].city);
+  }
+  console.log(locations);
+}
+
+// Fetch
+async function getWeather(location) {
   try {
     const data = await fetch(
-      'http://api.weatherapi.com/v1/forecast.json?key=9e75879a84fd47acb31141945230407&q=London&days=5&aqi=yes&alerts=no',
+      `http://api.weatherapi.com/v1/forecast.json?key=9e75879a84fd47acb31141945230407&q=${location}&days=5&aqi=yes&alerts=no`,
       {
         method: 'GET',
         mode: 'cors',
@@ -124,6 +188,7 @@ async function getWeather() {
     );
     const json = await data.json();
     updateDiv(json);
+    updateHour(json);
     return json;
   } catch (err) {
     console.error(err);
@@ -131,12 +196,29 @@ async function getWeather() {
   }
 }
 
-getWeather();
+async function getCity() {
+  try {
+    const data = await fetch(
+      'https://countriesnow.space/api/v0.1/countries/population/cities',
+      {
+        method: 'GET',
+        mode: 'cors',
+      },
+    );
+    const json = await data.json();
+    updateCity(json);
+  } catch (err) {
+    console.error(err);
+    return err;
+  }
+}
+
+getWeather('Manila');
+getCity();
 
 // Autocomplete
-const locations = ['Afghanistan', 'Albania', 'Algeria', 'Andorra', 'Angola', 'Anguilla', 'Antigua &amp; Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia &amp; Herzegovina', 'Botswana', 'Brazil', 'British Virgin Islands', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde', 'Cayman Islands', 'Central Arfrican Republic', 'Chad', 'Chile', 'China', 'Colombia', 'Congo', 'Cook Islands', 'Costa Rica', 'Cote D Ivoire', 'Croatia', 'Cuba', 'Curacao', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'Falkland Islands', 'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Polynesia', 'French West Indies', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Greenland', 'Grenada', 'Guam', 'Guatemala', 'Guernsey', 'Guinea', 'Guinea Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Ireland', 'Isle of Man', 'Israel', 'Italy', 'Jamaica', 'Japan', 'Jersey', 'Jordan', 'Kazakhstan', 'Kenya', 'Kiribati', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau', 'Macedonia', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Marshall Islands', 'Mauritania', 'Mauritius', 'Mexico', 'Micronesia', 'Moldova', 'Monaco', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nauro', 'Nepal', 'Netherlands', 'Netherlands Antilles', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'Norway', 'Oman', 'Pakistan', 'Palau', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Reunion', 'Romania', 'Russia', 'Rwanda', 'Saint Pierre &amp; Miquelon', 'Samoa', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka', 'St Kitts &amp; Nevis', 'St Lucia', 'St Vincent', 'Sudan', 'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Taiwan', 'Tajikistan', 'Tanzania', 'Thailand', "Timor L'Este", 'Togo', 'Tonga', 'Trinidad &amp; Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks &amp; Caicos', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States of America', 'Uruguay', 'Uzbekistan', 'Vanuatu', 'Vatican City', 'Venezuela', 'Vietnam', 'Virgin Islands (US)', 'Yemen', 'Zambia', 'Zimbabwe'];
-const searchBox = document.querySelector('.searchBox');
-const resultBox = document.querySelector('.resultBox');
+const searchBox = document.querySelector('#searchBox');
+const resultBox = document.querySelector('#resultBox');
 
 searchBox.addEventListener('input', () => {
   let result = [];
@@ -168,3 +250,12 @@ function displayAutocomplete(result) {
   });
   console.log(result);
 }
+
+// Form
+const searchForm = document.querySelector('#searchForm');
+searchForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  getWeather(event.target[0].value);
+  event.target[0].value = '';
+  clearAutocomplete();
+});
