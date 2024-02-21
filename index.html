@@ -9,7 +9,7 @@
     <script src="script.js" defer></script>
 </head>
 
-<body>
+<body class="h-screen weatherMorning">
     <h1>Weather App</h1>
     <form id="searchForm" action="">
         <input class="border border-solid mt-2 mr-0 border-black rounded-sm mb-2" type="text" autocomplete="off"
@@ -27,7 +27,7 @@
             <h2><span id="currentHigh">high</span> <span id="currentLow">low</span></h2>
         </div>
 
-        <div class="mb-3 border border-solid border-black" id="forecastHour">
+        <div class="mb-3 border border-solid border-black flex flex-row gap-3 overflow-auto" id="forecastHour">
             <h2>Time</h2>
             <div>Icon</div>
             <h2>Temp</h2>
@@ -49,7 +49,7 @@
             <h2 id="windSpeed">Wind Speed</h2>
             <h2 id="windDir">Wind dir</h2>
             <h2 id="windDeg">Wind deg</h2>
-            <div class="bg-red-50">Wind dir icon</div>
+            <div>Wind dir icon</div>
         </div>
 
         <div class="mb-3 border border-solid border-black" id="feelsLike">

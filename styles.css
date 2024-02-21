@@ -13,3 +13,7 @@
     gap: 10px;
     overflow-x: auto;
 } */
+
+.weatherMorning {
+    @apply bg-gradient-to-t from-yellow-200 via-cyan-300 to-sky-500;
+}

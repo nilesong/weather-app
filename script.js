@@ -87,8 +87,8 @@ function updateHour(jsonWeather) {
     const hourIcon = document.createElement('div');
     const hourTemp = document.createElement('h2');
 
-    hourDiv.classList.add('hour', 'flex', 'flex-row', 'gap-3', 'overflow-auto');
-    hourTime.classList.add('hourTime');
+    hourDiv.classList.add('hour');
+    hourTime.classList.add('flex');
     hourIcon.classList.add('hourIcon');
     hourTemp.classList.add('hourTemp');
 
