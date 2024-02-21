@@ -5,34 +5,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="output.css">
     <script src="script.js" defer></script>
 </head>
 
 <body>
     <h1>Weather App</h1>
-    <form action="">
-        <input type="text" autocomplete="off" class="searchBox">
-        <button>Submit</button>
-        <ul class="resultBox"></ul>
+    <form id="searchForm" action="">
+        <input class="border border-solid mt-2 mr-0 border-black rounded-sm mb-2" type="text" autocomplete="off"
+            id="searchBox">
+        <button id="searchButton" type="submit">Submit</button>
+        <ul id="resultBox"></ul>
     </form>
 
-    <div class="info">
+    <div id="info">
 
-        <div class="current">
+        <div class="mb-3 border border-solid border-black" id="current">
             <h3 id="currentCity">Location</h3>
             <h1 id="currentTemp">Temp deg Cel</h1>
             <h2 id="currentDesc">description</h2>
             <h2><span id="currentHigh">high</span> <span id="currentLow">low</span></h2>
         </div>
 
-        <div class="forecastHour">
+        <div class="mb-3 border border-solid border-black" id="forecastHour">
             <h2>Time</h2>
             <div>Icon</div>
             <h2>Temp</h2>
         </div>
 
-        <div class="forecastDay">
+        <div class="mb-3 border border-solid border-black" id="forecastDay">
             <div id="dayOne"><span class="day">Day</span> <span class="icon">Icon</span> <span class="highC">High</span>
                 <span class="lowC">Low</span>
             </div>
@@ -44,41 +45,41 @@
         </div>
 
 
-        <div class="wind">
+        <div class="mb-3 border border-solid border-black" id="wind">
             <h2 id="windSpeed">Wind Speed</h2>
             <h2 id="windDir">Wind dir</h2>
             <h2 id="windDeg">Wind deg</h2>
-            <div>Wind dir icon</div>
+            <div class="bg-red-50">Wind dir icon</div>
         </div>
 
-        <div class="feelsLike">
+        <div class="mb-3 border border-solid border-black" id="feelsLike">
             <h2 id="feelsLikeC">feels like</h2>
         </div>
 
-        <div class="sun">
+        <div class="mb-3 border border-solid border-black" id="sun">
             <h3 id="sunrise">Sunrise</h3>
             <h3 id="sunset">Sunset</h3>
         </div>
 
-        <div class="moon">
+        <div class="mb-3 border border-solid border-black" id="moon">
             <h3 id="illumination">Illumination</h3>
             <h3 id="moonrise">Moonrise</h3>
             <h3 id="moonPhase">Moon Phase</h3>
         </div>
 
-        <div class="visibility">
+        <div class="mb-3 border border-solid border-black" id="visibility">
             <h2 id="visKm">visibility</h2>
         </div>
 
-        <div class="precipitation">
+        <div class="mb-3 border border-solid border-black" id="precipitation">
             <h2 id="precipMm">precipitation mm</h2>
         </div>
 
-        <div class="humidity">
+        <div class="mb-3 border border-solid border-black" id="humidity">
             <h2 id="humidPercent">humidity%</h2>
         </div>
 
-        <div class="pressure">
+        <div class="mb-3 border border-solid border-black" id="pressure">
             <h2 id="pressHpa">pressure hpa or mb</h2>
         </div>
         <!-- [current]
