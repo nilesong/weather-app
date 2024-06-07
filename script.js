@@ -5,8 +5,15 @@
 // document.body.appendChild(testDiv);
 
 // DOM Variables
+// Body
+const body = document.querySelector('body');
+
 // Autocomplete
 const locations = [];
+const conditions = [];
+
+// Whole weather info div
+const info = document.querySelector('#info');
 
 // Current
 const currentCity = document.querySelector('#currentCity');
@@ -64,10 +71,20 @@ const humidity = document.querySelector('#humidPercent');
 const pressure = document.querySelector('#pressHpa');
 
 // Functions
+// Match condition code for icon
+function matchCode(code) {
+  if (conditions.length < 1) {
+    // eslint-disable-next-line no-console
+    console.error('Weather conditions not yet loaded, returning code 1000');
+    return 1000;
+  }
+  return conditions.findIndex((condition) => condition === code);
+}
+
 // Reset forecastHour div
 function clearHour() {
-  while (forecastHour.firstChild) {
-    forecastHour.removeChild(forecastHour.firstChild);
+  while (forecastHour.children[1]) {
+    forecastHour.removeChild(forecastHour.children[1]);
   }
 }
 
@@ -76,7 +93,7 @@ function updateHour(jsonWeather) {
   // Reset main forecastHour div
   clearHour();
 
-  // Get current hour
+  // Get current date
   const dateNow = new Date();
   const hourNow = dateNow.getHours();
 
@@ -84,18 +101,18 @@ function updateHour(jsonWeather) {
     // Create Elements
     const hourDiv = document.createElement('div');
     const hourTime = document.createElement('h2');
-    const hourIcon = document.createElement('div');
+    const hourIcon = document.createElement('img');
     const hourTemp = document.createElement('h2');
 
-    hourDiv.classList.add('hour');
+    hourDiv.classList.add('hour', 'flex', 'flex-col', 'items-center', 'justify-center');
     hourTime.classList.add('flex');
     hourIcon.classList.add('hourIcon');
     hourTemp.classList.add('hourTemp');
 
     // Fetched data
-    hourTime.innerText = jsonWeather.forecast.forecastday[0].hour[i].time;
-    hourIcon.innerText = 'Icon';
-    hourTemp.innerText = jsonWeather.forecast.forecastday[0].hour[i].temp_c;
+    hourTime.innerText = (jsonWeather.forecast.forecastday[0].hour[i].time).slice(11);
+    hourIcon.src = `./icons/${matchCode(jsonWeather.forecast.forecastday[0].hour[i].condition.code)}.svg`;
+    hourTemp.innerText = `${jsonWeather.forecast.forecastday[0].hour[i].temp_c}\u00B0C`;
 
     // Append fetched data to single div
     hourDiv.appendChild(hourTime);
@@ -104,6 +121,37 @@ function updateHour(jsonWeather) {
 
     // Append to main forecastHour div
     forecastHour.appendChild(hourDiv);
+  }
+
+  // Count current hourly date elements (excluding header div)
+  const elementCount = forecastHour.childElementCount - 1;
+  if (elementCount < 24) {
+    for (let i = 0; i < (24 - elementCount); i++) {
+      // Create Elements
+      const hourDiv = document.createElement('div');
+      const hourTime = document.createElement('h2');
+      const hourIcon = document.createElement('img');
+      const hourTemp = document.createElement('h2');
+
+      hourDiv.classList.add('hour', 'flex', 'flex-col', 'items-center', 'justify-center');
+      hourTime.classList.add('flex');
+      hourIcon.classList.add('hourIcon');
+      hourTemp.classList.add('hourTemp');
+
+      // Fetched data
+      hourTime.innerText = (jsonWeather.forecast.forecastday[1].hour[i].time).slice(11);
+      // console.log(jsonWeather.forecast.forecastday[1].hour[i].time.slice(9, 4));
+      hourIcon.src = `./icons/${matchCode(jsonWeather.forecast.forecastday[1].hour[i].condition.code)}.svg`;
+      hourTemp.innerText = `${jsonWeather.forecast.forecastday[1].hour[i].temp_c}\u00B0C`;
+
+      // Append fetched data to single div
+      hourDiv.appendChild(hourTime);
+      hourDiv.appendChild(hourIcon);
+      hourDiv.appendChild(hourTemp);
+
+      // Append to main forecastHour div
+      forecastHour.appendChild(hourDiv);
+    }
   }
 }
 
@@ -123,24 +171,24 @@ function updateDiv(jsonWeather) {
 
   // Forecast Day
   day1Day.innerText = jsonWeather.forecast.forecastday[0].date;
-  day1Icon.innerText = 'Icon';
+  day1Icon.src = `./icons/${matchCode(jsonWeather.forecast.forecastday[0].day.condition.code)}.svg`;
   day1HighC.innerText = `${jsonWeather.forecast.forecastday[0].day.maxtemp_c}\u00B0C`;
   day1LowC.innerText = `${jsonWeather.forecast.forecastday[0].day.mintemp_c}\u00B0C`;
 
   day2Day.innerText = jsonWeather.forecast.forecastday[1].date;
-  day2Icon.innerText = 'Icon';
+  day2Icon.src = `./icons/${matchCode(jsonWeather.forecast.forecastday[1].day.condition.code)}.svg`;
   day2HighC.innerText = `${jsonWeather.forecast.forecastday[1].day.maxtemp_c}\u00B0C`;
   day2LowC.innerText = `${jsonWeather.forecast.forecastday[1].day.mintemp_c}\u00B0C`;
 
   day3Day.innerText = jsonWeather.forecast.forecastday[2].date;
-  day3Icon.innerText = 'Icon';
+  day3Icon.src = `./icons/${matchCode(jsonWeather.forecast.forecastday[2].day.condition.code)}.svg`;
   day3HighC.innerText = `${jsonWeather.forecast.forecastday[2].day.maxtemp_c}\u00B0C`;
   day3LowC.innerText = `${jsonWeather.forecast.forecastday[2].day.mintemp_c}\u00B0C`;
 
   // Wind
   windSpeed.innerText = `${jsonWeather.current.wind_kph}kph`;
   windDir.innerText = jsonWeather.current.wind_dir;
-  windDeg.innerText = `${jsonWeather.current.wind_degree}\u00B0C`;
+  windDeg.innerText = `${jsonWeather.current.wind_degree}\u00B0`;
 
   // Feels Like
   feelsLike.innerText = `${jsonWeather.current.feelslike_c}\u00B0C`;
@@ -167,16 +215,7 @@ function updateDiv(jsonWeather) {
   pressure.innerText = `${jsonWeather.current.pressure_mb}hPa`;
 }
 
-// Update city list
-function updateCity(jsonCity) {
-  // Final 2 ('null' & 'based') was not included
-  for (let i = 0; i < jsonCity.data.length - 2; i++) {
-    locations.push(jsonCity.data[i].city);
-  }
-  console.log(locations);
-}
-
-// Fetch
+// Fetch Weather
 async function getWeather(location) {
   try {
     const data = await fetch(
@@ -191,11 +230,22 @@ async function getWeather(location) {
     updateHour(json);
     return json;
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error(err);
     return err;
   }
 }
 
+// Update city list
+function updateCity(jsonCity) {
+  // Final 2 ('null' & 'based') was not included
+  for (let i = 0; i < jsonCity.data.length - 2; i++) {
+    locations.push(jsonCity.data[i].city.toUpperCase());
+  }
+  console.log(locations);
+}
+
+// Fetch city List
 async function getCity() {
   try {
     const data = await fetch(
@@ -207,14 +257,45 @@ async function getCity() {
     );
     const json = await data.json();
     updateCity(json);
+    return json;
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+    return err;
+  }
+}
+
+// Update conditions list
+function updateConditions(jsonConditions) {
+  for (let i = 0; i < jsonConditions.length; i++) {
+    conditions.push(jsonConditions[i].code);
+  }
+}
+
+// Fetch conditions list
+async function getConditions() {
+  try {
+    const data = await fetch(
+      'https://www.weatherapi.com/docs/conditions.json',
+      {
+        method: 'GET',
+        mode: 'cors',
+      },
+    );
+    const json = await data.json();
+    updateConditions(json);
+    console.log(conditions);
+    return json;
   } catch (err) {
     console.error(err);
     return err;
   }
 }
 
-getWeather('Manila');
 getCity();
+getConditions().then(() => {
+  getWeather('Manila');
+});
 
 // Autocomplete
 const searchBox = document.querySelector('#searchBox');
@@ -242,9 +323,10 @@ function displayAutocomplete(result) {
   result.map((value) => {
     const listItem = document.createElement('li');
     listItem.innerText = value;
+    listItem.classList.add('hover:bg-slate-200');
     listItem.addEventListener('click', () => {
-      console.log(listItem.innerText);
       searchBox.value = listItem.innerText;
+      clearAutocomplete();
     });
     resultBox.appendChild(listItem);
   });
@@ -258,4 +340,7 @@ searchForm.addEventListener('submit', (event) => {
   getWeather(event.target[0].value);
   event.target[0].value = '';
   clearAutocomplete();
+  info.classList.remove('hidden');
+  info.classList.add('grid');
+  body.classList.remove('justify-center');
 });
