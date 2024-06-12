@@ -323,7 +323,7 @@ function displayAutocomplete(result) {
   result.map((value) => {
     const listItem = document.createElement('li');
     listItem.innerText = value;
-    listItem.classList.add('hover:bg-slate-200');
+    listItem.classList.add('hover:bg-umber');
     listItem.addEventListener('click', () => {
       searchBox.value = listItem.innerText;
       clearAutocomplete();

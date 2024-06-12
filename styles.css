@@ -14,6 +14,19 @@
     overflow-x: auto;
 } */
 
+.arrow {
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 2px;
+}
+
+/* +45 deg needed */
+.test {
+    transform: rotate(-315deg);
+    -webkit-transform: rotate(-315deg);
+}
+
 .icon {
     @apply w-16 h-16
 }

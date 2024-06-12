@@ -684,7 +684,7 @@ video {
 
 .border-black {
   --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  border-color: rgb(2 4 3 / var(--tw-border-opacity));
 }
 
 .border-slate-800 {
@@ -692,30 +692,48 @@ video {
   border-color: rgb(30 41 59 / var(--tw-border-opacity));
 }
 
-.border-opacity-0 {
-  --tw-border-opacity: 0;
+.border-umber {
+  --tw-border-opacity: 1;
+  border-color: rgb(100 83 71 / var(--tw-border-opacity));
 }
 
-.bg-slate-500 {
+.border-opacity-20 {
+  --tw-border-opacity: 0.2;
+}
+
+.bg-black_3 {
   --tw-bg-opacity: 1;
-  background-color: rgb(100 116 139 / var(--tw-bg-opacity));
+  background-color: rgb(0 0 6 / var(--tw-bg-opacity));
 }
 
-.bg-slate-700 {
+.bg-raisin_black-200 {
   --tw-bg-opacity: 1;
-  background-color: rgb(51 65 85 / var(--tw-bg-opacity));
-}
-
-.bg-opacity-10 {
-  --tw-bg-opacity: 0.1;
+  background-color: rgb(10 13 18 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-5 {
   --tw-bg-opacity: 0.05;
 }
 
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
+}
+
+.bg-weather-app {
+  background-image: url('./img/background.jpg');
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
 .font-poppins {
   font-family: poppins;
+}
+
+.text-raisin_black-600 {
+  --tw-text-opacity: 1;
+  color: rgb(56 72 103 / var(--tw-text-opacity));
 }
 
 .text-white {
@@ -742,6 +760,20 @@ video {
     gap: 10px;
     overflow-x: auto;
 } */
+
+.arrow {
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 2px;
+}
+
+/* +45 deg needed */
+
+.test {
+  transform: rotate(-315deg);
+  -webkit-transform: rotate(-315deg);
+}
 
 .icon {
   height: 4rem;
@@ -849,9 +881,9 @@ video {
   border-color: rgb(255 255 255 / var(--tw-border-opacity));
 }
 
-.hover\:bg-slate-200:hover {
+.hover\:bg-umber:hover {
   --tw-bg-opacity: 1;
-  background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+  background-color: rgb(100 83 71 / var(--tw-bg-opacity));
 }
 
 .focus\:outline-white:focus {
