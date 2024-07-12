@@ -45,6 +45,7 @@ const day3LowC = document.querySelector('#dayThree>.lowC');
 const windSpeed = document.querySelector('#windSpeed');
 const windDir = document.querySelector('#windDir');
 const windDeg = document.querySelector('#windDeg');
+const windArrow = document.querySelector('.direction');
 
 // Feels Like
 const feelsLike = document.querySelector('#feelsLikeC');
@@ -189,6 +190,9 @@ function updateDiv(jsonWeather) {
   windSpeed.innerText = `${jsonWeather.current.wind_kph}kph`;
   windDir.innerText = jsonWeather.current.wind_dir;
   windDeg.innerText = `${jsonWeather.current.wind_degree}\u00B0`;
+  console.log(typeof (jsonWeather.current.wind_degree));
+  windArrow.style.transform = `rotate(-${(jsonWeather.current.wind_degree) + 45}deg)`;
+  windArrow.style.webkitTransform = `rotate(-${(jsonWeather.current.wind_degree) + 45}deg)`;
 
   // Feels Like
   feelsLike.innerText = `${jsonWeather.current.feelslike_c}\u00B0C`;

@@ -17,7 +17,7 @@
 <body class="flex flex-col justify-center h-screen bg-weather-app bg-cover font-poppins text-white">
 
     <div class="self-center">
-        <h1 class="text-raisin_black-600">Enter your location:</h1>
+        <h1 class="text-white">Enter your location:</h1>
         <form id="searchForm" action="">
             <input
                 class="mt-2 mr-0 w-72 border border-solid border-slate-800 bg-black_3 bg-opacity-5 caret-white rounded-xl mb-2 hover:border-white focus:outline-white"
@@ -68,10 +68,11 @@
         <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md col-span-2"
             id="wind">
             <div class="border-b border-solid border-black">WIND</div>
-            <h2 id="windSpeed">Wind Speed</h2>
-            <h2 id="windDir">Wind dir</h2><span><i class="arrow test"></i></span>
+            <div class="flex gap-3 items-center">
+                <h2 id="windSpeed">Wind Speed</h2><span><i class="arrow direction"></i>
+            </div>
+            <h2 id="windDir">Wind dir</h2>
             <h2 id="windDeg">Wind deg</h2>
-            <div>Wind dir icon</div>
         </div>
 
         <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md"

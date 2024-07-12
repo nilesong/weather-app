@@ -22,9 +22,9 @@
 }
 
 /* +45 deg needed */
-.test {
-    transform: rotate(-315deg);
-    -webkit-transform: rotate(-315deg);
+.direction {
+    transform: rotate(-265deg);
+    -webkit-transform: rotate(-265deg);
 }
 
 .icon {
