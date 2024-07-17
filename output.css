@@ -548,8 +548,8 @@ video {
   grid-column: span 2 / span 2;
 }
 
-.col-span-24 {
-  grid-column: span 24/ span 24;
+.row-span-3 {
+  grid-row: span 3 / span 3;
 }
 
 .mx-5 {
@@ -560,6 +560,11 @@ video {
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
+}
+
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .mb-10 {
@@ -576,6 +581,18 @@ video {
 
 .mt-2 {
   margin-top: 0.5rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-3 {
+  margin-top: 0.75rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .flex {
@@ -598,20 +615,24 @@ video {
   height: 100vh;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
+.h-40 {
+  height: 10rem;
+}
+
+.h-36 {
+  height: 9rem;
+}
+
 .w-72 {
   width: 18rem;
 }
 
-.scale-110 {
-  --tw-scale-x: 1.1;
-  --tw-scale-y: 1.1;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
-}
-
-.scale-150 {
-  --tw-scale-x: 1.5;
-  --tw-scale-y: 1.5;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+.w-full {
+  width: 100%;
 }
 
 .transform {
@@ -634,8 +655,28 @@ video {
   grid-template-columns: repeat(24, minmax(0, 1fr));
 }
 
+.grid-cols-10 {
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+}
+
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .grid-rows-2 {
   grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.grid-rows-3 {
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+}
+
+.grid-rows-6 {
+  grid-template-rows: repeat(6, minmax(0, 1fr));
 }
 
 .flex-row {
@@ -666,12 +707,20 @@ video {
   gap: 0.75rem;
 }
 
+.gap-2 {
+  gap: 0.5rem;
+}
+
 .self-center {
   align-self: center;
 }
 
 .overflow-auto {
   overflow: auto;
+}
+
+.overflow-scroll {
+  overflow: scroll;
 }
 
 .overflow-y-auto {
@@ -713,6 +762,11 @@ video {
   border-color: rgb(100 83 71 / var(--tw-border-opacity));
 }
 
+.border-raisin_black {
+  --tw-border-opacity: 1;
+  border-color: rgb(26 33 47 / var(--tw-border-opacity));
+}
+
 .border-opacity-20 {
   --tw-border-opacity: 0.2;
 }
@@ -747,9 +801,72 @@ video {
   font-family: poppins;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
+.font-medium {
+  font-weight: 500;
+}
+
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-umber {
+  --tw-text-opacity: 1;
+  color: rgb(100 83 71 / var(--tw-text-opacity));
+}
+
+.text-raisin_black-500 {
+  --tw-text-opacity: 1;
+  color: rgb(26 33 47 / var(--tw-text-opacity));
+}
+
+.text-raisin_black-800 {
+  --tw-text-opacity: 1;
+  color: rgb(142 159 193 / var(--tw-text-opacity));
+}
+
+.text-raisin_black-600 {
+  --tw-text-opacity: 1;
+  color: rgb(56 72 103 / var(--tw-text-opacity));
+}
+
+.text-slate-600 {
+  --tw-text-opacity: 1;
+  color: rgb(71 85 105 / var(--tw-text-opacity));
+}
+
+.text-slate-400 {
+  --tw-text-opacity: 1;
+  color: rgb(148 163 184 / var(--tw-text-opacity));
+}
+
+.text-slate-200 {
+  --tw-text-opacity: 1;
+  color: rgb(226 232 240 / var(--tw-text-opacity));
+}
+
+.text-slate-300 {
+  --tw-text-opacity: 1;
+  color: rgb(203 213 225 / var(--tw-text-opacity));
+}
+
+.text-raisin_black {
+  --tw-text-opacity: 1;
+  color: rgb(26 33 47 / var(--tw-text-opacity));
+}
+
+.text-raisin_black-400 {
+  --tw-text-opacity: 1;
+  color: rgb(20 26 37 / var(--tw-text-opacity));
+}
+
+.text-raisin_black-700 {
+  --tw-text-opacity: 1;
+  color: rgb(88 111 159 / var(--tw-text-opacity));
 }
 
 .caret-white {
@@ -786,7 +903,8 @@ video {
   -webkit-transform: rotate(-265deg);
 }
 
-.icon {
+.icon,
+.hourIcon {
   height: 4rem;
   width: 4rem;
 }
@@ -899,4 +1017,27 @@ video {
 
 .focus\:outline-white:focus {
   outline-color: #fff;
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-8 {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-24 {
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+  }
+
+  .lg\:text-white {
+    --tw-text-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+  }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:grid-cols-24 {
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+  }
 }

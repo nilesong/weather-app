@@ -27,7 +27,8 @@
     -webkit-transform: rotate(-265deg);
 }
 
-.icon {
+.icon,
+.hourIcon {
     @apply w-16 h-16
 }
 

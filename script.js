@@ -8,6 +8,9 @@
 // Body
 const body = document.querySelector('body');
 
+// Search Bar
+const searchBar = document.querySelector('#searchBar');
+
 // Autocomplete
 const locations = [];
 const conditions = [];
@@ -84,8 +87,8 @@ function matchCode(code) {
 
 // Reset forecastHour div
 function clearHour() {
-  while (forecastHour.children[1]) {
-    forecastHour.removeChild(forecastHour.children[1]);
+  while (forecastHour.children[0]) {
+    forecastHour.removeChild(forecastHour.children[0]);
   }
 }
 
@@ -127,7 +130,7 @@ function updateHour(jsonWeather) {
   // Count current hourly date elements (excluding header div)
   const elementCount = forecastHour.childElementCount - 1;
   if (elementCount < 24) {
-    for (let i = 0; i < (24 - elementCount); i++) {
+    for (let i = 0; i < (23 - elementCount); i++) {
       // Create Elements
       const hourDiv = document.createElement('div');
       const hourTime = document.createElement('h2');
@@ -164,8 +167,8 @@ function updateDiv(jsonWeather) {
   currentCity.innerText = jsonWeather.location.name;
   currentTemp.innerText = `${jsonWeather.current.temp_c}\u00B0C`;
   currentDesc.innerText = jsonWeather.current.condition.text;
-  currentHigh.innerText = `${jsonWeather.forecast.forecastday[0].day.maxtemp_c}\u00B0C`;
-  currentLow.innerText = `${jsonWeather.forecast.forecastday[0].day.mintemp_c}\u00B0C`;
+  currentHigh.innerText = `H: ${jsonWeather.forecast.forecastday[0].day.maxtemp_c}\u00B0C`;
+  currentLow.innerText = `L: ${jsonWeather.forecast.forecastday[0].day.mintemp_c}\u00B0C`;
 
   // // Forcast Hour
   // updateHour();
@@ -347,4 +350,5 @@ searchForm.addEventListener('submit', (event) => {
   info.classList.remove('hidden');
   info.classList.add('grid');
   body.classList.remove('justify-center');
+  searchBar.classList.add('mt-4');
 });

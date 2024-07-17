@@ -16,7 +16,7 @@
 
 <body class="flex flex-col justify-center h-screen bg-weather-app bg-cover font-poppins text-white">
 
-    <div class="self-center">
+    <div class="self-center" id="searchBar">
         <h1 class="text-white">Enter your location:</h1>
         <form id="searchForm" action="">
             <input
@@ -38,27 +38,34 @@
         </div>
 
 
-        <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md col-span-2 grid grid-flow-col grid-cols-24 grid-rows-2 gap-10 overflow-auto"
-            id="forecastHour">
-            <div class="grid col-span-24 border-b border-solid border-black">24-HOUR
-                FORECAST</div>
-            <h2>Time</h2>
-            <div>Icon</div>
-            <h2>Temp</h2>
+        <div
+            class="flex flex-col w-full bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md col-span-2">
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black lg:text-white">24-HOUR
+                FORECAST
+            </div>
+            <div class="bg-raisin_black-200 bg-opacity-50 h-32 mx-4 mt-4 grid grid-flow-row grid-cols-4 gap-10 items-center overflow-auto md:grid-cols-8 2xl:grid-cols-24"
+                id="forecastHour">
+            </div>
+
+            <!-- grid grid-flow-col grid-cols-24 grid-rows-2 gap-10  -->
+
         </div>
 
         <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md
                 col-span-2" id="forecastDay">
-            <div class="border-b border-solid border-black">3-DAY FORECAST</div>
-            <div class="flex flex-row justify-evenly items-center border-b" id="dayOne"><span class="day">Day</span>
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black">3-DAY FORECAST
+            </div>
+            <div class="flex flex-row justify-evenly items-center border-b border-solid border-raisin_black"
+                id="dayOne"><span class="day">Day</span>
                 <img class="icon" src="./icons/weather1.svg"></img> <span class="highC">High</span>
                 <span class="lowC">Low</span>
             </div>
-            <div class="flex flex-row justify-evenly items-center border-b" id="dayTwo"><span class="day">Day</span>
+            <div class="flex flex-row justify-evenly items-center border-b border-solid border-raisin_black"
+                id="dayTwo"><span class="day">Day</span>
                 <img class="icon" src="./icons/weather1.svg"></img> <span class="highC">High</span>
                 <span class="lowC">Low</span>
             </div>
-            <div class="flex flex-row justify-evenly items-center border-b" id="dayThree"><span class="day">Day</span>
+            <div class="flex flex-row justify-evenly items-center" id="dayThree"><span class="day">Day</span>
                 <img class="icon" src="./icons/weather1.svg"></img> <span class="highC">High</span>
                 <span class="lowC">Low</span>
             </div>
@@ -67,7 +74,7 @@
 
         <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md col-span-2"
             id="wind">
-            <div class="border-b border-solid border-black">WIND</div>
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black">WIND</div>
             <div class="flex gap-3 items-center">
                 <h2 id="windSpeed">Wind Speed</h2><span><i class="arrow direction"></i>
             </div>
@@ -77,32 +84,32 @@
 
         <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md"
             id="feelsLike">
-            <div class="border-b border-solid border-black">FEELS LIKE</div>
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black">FEELS LIKE</div>
             <h2 id="feelsLikeC">feels like</h2>
         </div>
 
         <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md"
             id="sun">
-            <div class="border-b border-solid border-black">SUNRISE</div>
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black">SUNRISE</div>
             <h3 id="sunrise">Sunrise</h3>
             <h3 id="sunset">Sunset</h3>
         </div>
 
         <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md"
             id="visibility">
-            <div class="border-b border-solid border-black">VISIBILITY</div>
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black">VISIBILITY</div>
             <h2 id="visKm">visibility</h2>
         </div>
 
         <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md"
             id="precipitation">
-            <div class="border-b border-solid border-black">PRECIPITATION</div>
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black">PRECIPITATION</div>
             <h2 id="precipMm">precipitation mm</h2>
         </div>
 
         <div class="bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md col-span-2"
             id="moon">
-            <div class="border-b border-solid border-black">MOON</div>
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black">MOON</div>
             <h3 id="illumination">Illumination</h3>
             <h3 id="moonrise">Moonrise</h3>
             <h3 id="moonPhase">Moon Phase</h3>
@@ -110,13 +117,13 @@
 
         <div class="mb-10 bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md"
             id="humidity">
-            <div class="border-b border-solid border-black">HUMIDITY</div>
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black">HUMIDITY</div>
             <h2 id="humidPercent">humidity%</h2>
         </div>
 
         <div class="mb-10 bg-raisin_black-200 bg-opacity-50 border border-solid border-umber border-opacity-20 rounded-md"
             id="pressure">
-            <div class="border-b border-solid border-black">PRESSURE</div>
+            <div class="text-slate-400 font-medium border-b border-solid border-raisin_black">PRESSURE</div>
             <h2 id="pressHpa">pressure hpa or mb</h2>
         </div>
         <!-- [current]
