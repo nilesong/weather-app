@@ -159,6 +159,27 @@ function updateHour(jsonWeather) {
   }
 }
 
+// Get Wind Direction
+function getDirection(angle) {
+  if (angle === 0) {
+    return 'EAST';
+  } if (angle === 90) {
+    return 'NORTH';
+  } if (angle === 180) {
+    return 'WEST';
+  } if (angle === 270) {
+    return 'SOUTH';
+  } if (angle > 0 && angle < 90) {
+    return 'NORTHEAST';
+  } if (angle > 90 && angle < 180) {
+    return 'NORTHWEST';
+  } if (angle > 180 && angle < 270) {
+    return 'SOUTHWEST';
+  } if (angle > 270 && angle < 360) {
+    return 'SOUTHEAST';
+  }
+}
+
 // Populate HTML with weather data
 function updateDiv(jsonWeather) {
   console.log(jsonWeather);
@@ -191,7 +212,8 @@ function updateDiv(jsonWeather) {
 
   // Wind
   windSpeed.innerText = `${jsonWeather.current.wind_kph}kph`;
-  windDir.innerText = jsonWeather.current.wind_dir;
+  // windDir.innerText = jsonWeather.current.wind_dir;
+  windDir.innerText = getDirection(jsonWeather.current.wind_degree);
   windDeg.innerText = `${jsonWeather.current.wind_degree}\u00B0`;
   console.log(typeof (jsonWeather.current.wind_degree));
   windArrow.style.transform = `rotate(-${(jsonWeather.current.wind_degree) + 45}deg)`;
@@ -319,7 +341,6 @@ searchBox.addEventListener('input', () => {
   displayAutocomplete(result);
 });
 
-// Look for better implementation of autocomplete box
 function clearAutocomplete() {
   while (resultBox.firstChild) {
     resultBox.removeChild(resultBox.firstChild);
