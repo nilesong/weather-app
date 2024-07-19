@@ -212,8 +212,7 @@ function updateDiv(jsonWeather) {
 
   // Wind
   windSpeed.innerText = `${jsonWeather.current.wind_kph}kph`;
-  // windDir.innerText = jsonWeather.current.wind_dir;
-  windDir.innerText = getDirection(jsonWeather.current.wind_degree);
+  windDir.innerText = jsonWeather.current.wind_dir;
   windDeg.innerText = `${jsonWeather.current.wind_degree}\u00B0`;
   console.log(typeof (jsonWeather.current.wind_degree));
   windArrow.style.transform = `rotate(-${(jsonWeather.current.wind_degree) + 45}deg)`;
