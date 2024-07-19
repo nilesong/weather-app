@@ -1,3 +1,5 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
 // DOM Variables
 // Body
 const body = document.querySelector('body');
@@ -279,7 +281,6 @@ async function getConditions() {
     updateConditions(json);
     return json;
   } catch (err) {
-    console.error(err);
     return err;
   }
 }
@@ -293,16 +294,6 @@ getConditions().then(() => {
 const searchBox = document.querySelector('#searchBox');
 const resultBox = document.querySelector('#resultBox');
 
-searchBox.addEventListener('input', () => {
-  let result = [];
-  const input = searchBox.value;
-  if (input.length) {
-    result = locations.filter((location) => location.toLowerCase().includes(input.toLowerCase()));
-  }
-  clearAutocomplete();
-  displayAutocomplete(result);
-});
-
 function clearAutocomplete() {
   while (resultBox.firstChild) {
     resultBox.removeChild(resultBox.firstChild);
@@ -310,6 +301,7 @@ function clearAutocomplete() {
 }
 
 function displayAutocomplete(result) {
+  // eslint-disable-next-line array-callback-return
   result.map((value) => {
     const listItem = document.createElement('li');
     listItem.innerText = value;
@@ -321,6 +313,16 @@ function displayAutocomplete(result) {
     resultBox.appendChild(listItem);
   });
 }
+
+searchBox.addEventListener('input', () => {
+  let result = [];
+  const input = searchBox.value;
+  if (input.length) {
+    result = locations.filter((location) => location.toLowerCase().includes(input.toLowerCase()));
+  }
+  clearAutocomplete();
+  displayAutocomplete(result);
+});
 
 // Form
 const searchForm = document.querySelector('#searchForm');
