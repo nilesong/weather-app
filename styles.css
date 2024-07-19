@@ -2,18 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* #info>div {
-    border: 1px solid black;
-    margin-bottom: 10px;
-} */
-
-/* #forecastHour {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    overflow-x: auto;
-} */
-
 .arrow {
     border: solid white;
     border-width: 0 2px 2px 0;
