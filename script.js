@@ -1,9 +1,3 @@
-// Basic fetch functionality
-// Change variable names (json, testDiv)
-// Change fetch type
-// const testDiv = document.createElement('div');
-// document.body.appendChild(testDiv);
-
 // DOM Variables
 // Body
 const body = document.querySelector('body');
@@ -144,7 +138,6 @@ function updateHour(jsonWeather) {
 
       // Fetched data
       hourTime.innerText = (jsonWeather.forecast.forecastday[1].hour[i].time).slice(11);
-      // console.log(jsonWeather.forecast.forecastday[1].hour[i].time.slice(9, 4));
       hourIcon.src = `./icons/${matchCode(jsonWeather.forecast.forecastday[1].hour[i].condition.code)}.svg`;
       hourTemp.innerText = `${jsonWeather.forecast.forecastday[1].hour[i].temp_c}\u00B0C`;
 
@@ -159,40 +152,14 @@ function updateHour(jsonWeather) {
   }
 }
 
-// Get Wind Direction
-function getDirection(angle) {
-  if (angle === 0) {
-    return 'EAST';
-  } if (angle === 90) {
-    return 'NORTH';
-  } if (angle === 180) {
-    return 'WEST';
-  } if (angle === 270) {
-    return 'SOUTH';
-  } if (angle > 0 && angle < 90) {
-    return 'NORTHEAST';
-  } if (angle > 90 && angle < 180) {
-    return 'NORTHWEST';
-  } if (angle > 180 && angle < 270) {
-    return 'SOUTHWEST';
-  } if (angle > 270 && angle < 360) {
-    return 'SOUTHEAST';
-  }
-}
-
 // Populate HTML with weather data
 function updateDiv(jsonWeather) {
-  console.log(jsonWeather);
-
   // Current
   currentCity.innerText = jsonWeather.location.name;
   currentTemp.innerText = `${jsonWeather.current.temp_c}\u00B0C`;
   currentDesc.innerText = jsonWeather.current.condition.text;
   currentHigh.innerText = `H: ${jsonWeather.forecast.forecastday[0].day.maxtemp_c}\u00B0C`;
   currentLow.innerText = `L: ${jsonWeather.forecast.forecastday[0].day.mintemp_c}\u00B0C`;
-
-  // // Forcast Hour
-  // updateHour();
 
   // Forecast Day
   day1Day.innerText = jsonWeather.forecast.forecastday[0].date;
@@ -214,7 +181,6 @@ function updateDiv(jsonWeather) {
   windSpeed.innerText = `${jsonWeather.current.wind_kph}kph`;
   windDir.innerText = jsonWeather.current.wind_dir;
   windDeg.innerText = `${jsonWeather.current.wind_degree}\u00B0`;
-  console.log(typeof (jsonWeather.current.wind_degree));
   windArrow.style.transform = `rotate(-${(jsonWeather.current.wind_degree) + 45}deg)`;
   windArrow.style.webkitTransform = `rotate(-${(jsonWeather.current.wind_degree) + 45}deg)`;
 
@@ -270,7 +236,6 @@ function updateCity(jsonCity) {
   for (let i = 0; i < jsonCity.data.length - 2; i++) {
     locations.push(jsonCity.data[i].city.toUpperCase());
   }
-  console.log(locations);
 }
 
 // Fetch city List
@@ -312,7 +277,6 @@ async function getConditions() {
     );
     const json = await data.json();
     updateConditions(json);
-    console.log(conditions);
     return json;
   } catch (err) {
     console.error(err);
@@ -335,7 +299,6 @@ searchBox.addEventListener('input', () => {
   if (input.length) {
     result = locations.filter((location) => location.toLowerCase().includes(input.toLowerCase()));
   }
-  console.log(result);
   clearAutocomplete();
   displayAutocomplete(result);
 });
@@ -357,7 +320,6 @@ function displayAutocomplete(result) {
     });
     resultBox.appendChild(listItem);
   });
-  console.log(result);
 }
 
 // Form
