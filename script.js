@@ -215,7 +215,7 @@ function updateDiv(jsonWeather) {
 async function getWeather(location) {
   try {
     const data = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=f86c77716783459d84475627241209&q=${location}&days=5&aqi=yes&alerts=no`,
+      `https://api.weatherapi.com/v1/forecast.json?key=f86c77716783459d84475627241209&q=${location}&days=5&aqi=yes&alerts=no`,
       {
         method: 'GET',
         mode: 'cors',
