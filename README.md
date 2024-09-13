@@ -1,5 +1,5 @@
 # Weather App
-Made With: TailwindCSS, WeatherAPI
+Made With: TailwindCSS, WeatherAPI <br />
 Demo: https://nilesong.github.io/weather-app/
 - Front-end application developed with Vanilla HTML, Javascript & TailwindCSS that provides up-to-date weather for any location.
 - Displays important weather information obtained with WeatherAPI such as current temperature, humidity, wind speed along with a 3-day forecast.
